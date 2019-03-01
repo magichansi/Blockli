@@ -1,4 +1,4 @@
-package blockstore
+package blockli
 
 import (
 	"encoding/json"

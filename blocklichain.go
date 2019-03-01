@@ -1,9 +1,10 @@
-package blocklichain
+package blockli
 
 import (
-	"github.com/magichansi/blockli/blockcache"
 	"encoding/json"
 	"log"
+
+	"github.com/magichansi/blockli/blockcache"
 
 	"github.com/magichansi/blockli/block"
 )

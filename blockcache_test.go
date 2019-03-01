@@ -1,4 +1,4 @@
-package blockcache_test
+package blockli
 
 import "testing"
 import "github.com/magichansi/blockli/block"
