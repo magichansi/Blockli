@@ -40,7 +40,8 @@ func (db *BlockCache) Read(key string) *block.Block {
 	return nil
 }
 
-func (db *BlockCache) Write(value *block.Block) {
+func (db *BlockCache) Write(value *block.Block) string {
 	db.blockarray[value.GetHash()] = value
 	db.blockStore.Save(value.GetHash(), value)
+	return value.GetHash()
 }

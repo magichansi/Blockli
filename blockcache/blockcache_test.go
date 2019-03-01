@@ -1,16 +1,16 @@
 package blockcache
 
 import "testing"
-import "blockli/Block"
+import "blockli/block"
 
 func Test_add(t *testing.T) {
 
 	blkch := New("C:/dev/Go")
-	blk := Block.New("data", "key")
-	blkch.insertIntoDB("a", blk)
+	blk := block.New("data", "key")
+	hash:= blkch.Write(blk)
 
-	var newBlock *Block.Block
-	newBlock = blkch.getFromDB("a")
+	var newBlock *block.Block
+	newBlock = blkch.Read(hash)
 
 	if newBlock.GetData() != "data" {
 		t.Errorf("Error Serialization. expect %s. got %s", "data", newBlock.GetData())
