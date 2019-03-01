@@ -1,4 +1,4 @@
-package blocklichain
+package blockli
 
 import "testing"
 

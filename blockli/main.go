@@ -1,11 +1,11 @@
 package main
 
 import "fmt"
-import "github.com/magichansi/blockli/blocklichain"
+import "github.com/magichansi/blockli"
 
 func main() {
 
-	bc := blocklichain.New()
+	bc := blockli.New()
 	bc.Init()
 	bc.AddBlock("sdsd")
 	bc.AddBlock("sdsd")

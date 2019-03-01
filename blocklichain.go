@@ -1,4 +1,4 @@
-package blocklichain
+package blockli
 
 import (
 	"encoding/json"
@@ -9,20 +9,20 @@ import (
 	"github.com/magichansi/blockli/block"
 )
 
-type blocklichain struct {
+type blockli struct {
 	prevgenesisBlockHash string
 	blockCache           *blockcache.BlockCache
 	currentBlockHash     string
 }
 
-func New() *blocklichain {
+func New() *blockli {
 
-	a := new(blocklichain)
+	a := new(blockli)
 	a.blockCache = blockcache.New("C:/dev/Go")
 	return a
 }
 
-func (bc *blocklichain) Init() string {
+func (bc *blockli) Init() string {
 	bc.prevgenesisBlockHash = "AAA"
 	genesisBlock := block.New("genesis", bc.prevgenesisBlockHash)
 	genesisBlockHash := genesisBlock.GetHash()
@@ -34,7 +34,7 @@ func (bc *blocklichain) Init() string {
 	return genesisBlockHash
 }
 
-func (bc *blocklichain) AddBlock(data string) string {
+func (bc *blockli) AddBlock(data string) string {
 	newBlock := block.New(data, bc.currentBlockHash)
 	newBlockHash := newBlock.GetHash()
 	bc.blockCache.Write(newBlock)
@@ -45,16 +45,16 @@ func (bc *blocklichain) AddBlock(data string) string {
 	return newBlockHash
 }
 
-func (bc *blocklichain) getBlock(hash string) *block.Block {
+func (bc *blockli) getBlock(hash string) *block.Block {
 	return bc.blockCache.Read(hash)
 }
 
-func (bc *blocklichain) ShowBlock(hash string) string {
+func (bc *blockli) ShowBlock(hash string) string {
 	jsonBlock, _ := json.Marshal(bc.blockCache.Read(hash))
 	return string(jsonBlock)
 }
 
-func (bc *blocklichain) ValidateBlock(hash string) bool {
+func (bc *blockli) ValidateBlock(hash string) bool {
 	//if hash genesis return true
 
 	currentPreviousHash := bc.getBlock(hash).GetPreviousHash()
@@ -72,6 +72,6 @@ func (bc *blocklichain) ValidateBlock(hash string) bool {
 
 }
 
-func (bc *blocklichain) GetGenesisHash() string {
+func (bc *blockli) GetGenesisHash() string {
 	return bc.prevgenesisBlockHash
 }
