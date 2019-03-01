@@ -1,4 +1,4 @@
-package blockli
+package blockcache
 
 import (
 	"log"

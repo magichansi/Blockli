@@ -1,4 +1,4 @@
-package blockli
+package blocklichain
 
 import (
 	"encoding/json"

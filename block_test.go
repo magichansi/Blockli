@@ -1,4 +1,4 @@
-package blockli
+package block
 
 import "testing"
 

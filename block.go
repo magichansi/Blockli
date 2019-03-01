@@ -1,4 +1,4 @@
-package blockli
+package block
 
 import "time"
 import "crypto/sha256"
