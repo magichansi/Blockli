@@ -1,9 +1,10 @@
 package blockcache
 
 import (
-	"blockli/block"
-	"blockli/blockstore"
 	"log"
+
+	"github.com/magichansi/blockli/block"
+	"github.com/magichansi/blockli/blockstore"
 )
 
 //BlockCache asdadasda

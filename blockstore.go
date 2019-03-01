@@ -1,8 +1,9 @@
 package blockstore
 
 import (
-	Block "blockli/block"
 	"encoding/json"
+
+	Block "github.com/magichansi/blockli/block"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/syndtr/goleveldb/leveldb"
