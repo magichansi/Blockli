@@ -72,6 +72,6 @@ func (bc *blocklichain) ValidateBlock(hash string) bool {
 
 }
 
-func (bc *Blockli) GetGenesisHash() string {
+func (bc *blocklichain) GetGenesisHash() string {
 	return bc.prevgenesisBlockHash
 }
