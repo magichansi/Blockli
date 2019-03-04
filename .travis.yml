@@ -10,4 +10,5 @@ before_install:
   - go get github.com/sirupsen/logrus
   - go get github.com/syndtr/goleveldb/leveldb
 after_success:
+  - export CODECOV_TOKEN="7b9ed0e2-df93-46ab-8b21-6d11f71abb9b"
   - bash <(curl -s https://codecov.io/bash)
