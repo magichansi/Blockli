@@ -4,33 +4,40 @@ import "time"
 import "crypto/sha256"
 import "encoding/hex"
 
+//Block asd
 type Block struct {
-	previousHash string `json:"previousHash"`
-	data         string `json:"data"`
-	timestamp    int64  `json:"timestamp"`
+	PreviousHash string `json:"previousHash"`
+	Data         string `json:"data"`
+	Timestamp    int64  `json:"timestamp"`
 	Hash         string `json:"hash"`
 }
 
+//New asdsd
 func New(data string, previousHash string) *Block {
 	returnBlock := new(Block)
-	returnBlock.data = data
-	returnBlock.timestamp = time.Now().Unix()
-	returnBlock.previousHash = previousHash
-	a := []byte(data + previousHash + string(returnBlock.timestamp))
+	returnBlock.Data = data
+	returnBlock.Timestamp = time.Now().Unix()
+	returnBlock.PreviousHash = previousHash
+	a := []byte(data + previousHash + string(returnBlock.Timestamp))
 	currentHash := sha256.Sum256(a)
 	returnBlock.Hash = hex.EncodeToString(currentHash[:])
 	return returnBlock
 }
 
+//GetTimestamp sdd
 func (b Block) GetTimestamp() int64 {
-	return b.timestamp
+	return b.Timestamp
 }
+
+//GetPreviousHash sds
 func (b Block) GetPreviousHash() string {
-	return b.previousHash
+	return b.PreviousHash
 }
+//GetHash adssd
 func (b Block) GetHash() string {
 	return b.Hash
 }
+//GetData sdsd
 func (b Block) GetData() string {
-	return b.data
+	return b.Data
 }
