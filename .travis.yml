@@ -9,3 +9,5 @@ script: go test ./...
 before_install:
   - go get github.com/sirupsen/logrus
   - go get github.com/syndtr/goleveldb/leveldb
+ after_success:
+  - bash <(curl -s https://codecov.io/bash)
