@@ -3,28 +3,27 @@ package blockli
 import (
 	"encoding/json"
 	"log"
-
-	"github.com/magichansi/blockli/blockcache"
-
-	"github.com/magichansi/blockli/block"
 )
 
-type blockli struct {
+//Blockli sds
+type Blockli struct {
 	prevgenesisBlockHash string
-	blockCache           *blockcache.BlockCache
+	blockCache           *BlockCache
 	currentBlockHash     string
 }
 
-func New() *blockli {
+//NewBlockli asdad
+func NewBlockli() *Blockli {
 
-	a := new(blockli)
-	a.blockCache = blockcache.New("C:/dev/Go")
+	a := new(Blockli)
+	a.blockCache = NewBlockCache("C:/dev/Go")
 	return a
 }
 
-func (bc *blockli) Init() string {
+//Init sdsd
+func (bc *Blockli) Init() string {
 	bc.prevgenesisBlockHash = "AAA"
-	genesisBlock := block.New("genesis", bc.prevgenesisBlockHash)
+	genesisBlock := newBlock("genesis", bc.prevgenesisBlockHash)
 	genesisBlockHash := genesisBlock.GetHash()
 	bc.blockCache.Write(genesisBlock)
 	bc.currentBlockHash = genesisBlockHash
@@ -34,8 +33,9 @@ func (bc *blockli) Init() string {
 	return genesisBlockHash
 }
 
-func (bc *blockli) AddBlock(data string) string {
-	newBlock := block.New(data, bc.currentBlockHash)
+//AddBlock sds
+func (bc *Blockli) AddBlock(data string) string {
+	newBlock := newBlock(data, bc.currentBlockHash)
 	newBlockHash := newBlock.GetHash()
 	bc.blockCache.Write(newBlock)
 	bc.currentBlockHash = newBlockHash
@@ -45,16 +45,18 @@ func (bc *blockli) AddBlock(data string) string {
 	return newBlockHash
 }
 
-func (bc *blockli) getBlock(hash string) *block.Block {
+func (bc *Blockli) getBlock(hash string) *Block {
 	return bc.blockCache.Read(hash)
 }
 
-func (bc *blockli) ShowBlock(hash string) string {
+//ShowBlock sd
+func (bc *Blockli) ShowBlock(hash string) string {
 	jsonBlock, _ := json.Marshal(bc.blockCache.Read(hash))
 	return string(jsonBlock)
 }
 
-func (bc *blockli) ValidateBlock(hash string) bool {
+//ValidateBlock sdsds
+func (bc *Blockli) ValidateBlock(hash string) bool {
 	//if hash genesis return true
 
 	currentPreviousHash := bc.getBlock(hash).GetPreviousHash()
@@ -65,13 +67,13 @@ func (bc *blockli) ValidateBlock(hash string) bool {
 	if bc.getBlock(hash) != nil {
 		//else get prehash and validate
 		return bc.ValidateBlock(currentPreviousHash)
-	} else {
-		log.Println("no genesis got", currentPreviousHash)
-		return false
 	}
+	log.Println("no genesis got", currentPreviousHash)
+	return false
 
 }
 
-func (bc *blockli) GetGenesisHash() string {
+//GetGenesisHash dfd
+func (bc *Blockli) GetGenesisHash() string {
 	return bc.prevgenesisBlockHash
 }

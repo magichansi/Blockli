@@ -2,16 +2,16 @@ package blockli
 
 import "testing"
 
-func Test_genesisBlock(t *testing.T) {
-	bc := New()
+func Test_genesisBlockBlockli(t *testing.T) {
+	bc := NewBlockli()
 	bc.Init()
 	if bc.prevgenesisBlockHash != "AAA" {
 		t.Fail()
 	}
 }
 
-func Test_addBlock(t *testing.T) {
-	bc := New()
+func Test_addBlockBlockli(t *testing.T) {
+	bc := NewBlockli()
 	bc.Init()
 	hash := bc.AddBlock("data")
 	if bc.getBlock(hash).GetHash() != hash {
@@ -31,8 +31,8 @@ func Test_addBlock(t *testing.T) {
 
 }
 
-func Test_validate(t *testing.T) {
-	bc := New()
+func Test_validateBlockli(t *testing.T) {
+	bc := NewBlockli()
 	genhash := bc.Init()
 
 	if !bc.ValidateBlock(genhash) {
@@ -45,16 +45,16 @@ func Test_validate(t *testing.T) {
 	}
 }
 
-func Benchmark_SpeedAdd(b *testing.B) {
-	bc := New()
+func Benchmark_SpeedAddBlockli(b *testing.B) {
+	bc := NewBlockli()
 	bc.Init()
 	for i := 0; i < 10000000; i++ {
 		bc.AddBlock("data" + string(i))
 	}
 }
 
-func Benchmark_SpeedValidate(b *testing.B) {
-	bc := New()
+func Benchmark_SpeedValidateBlockli(b *testing.B) {
+	bc := NewBlockli()
 	bc.Init()
 	for i := 0; i < 3000000; i++ {
 		bc.AddBlock("data" + string(i))

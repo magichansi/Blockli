@@ -1,10 +1,10 @@
-package block
+package blockli
 
 import "testing"
 
-func Test_Constructor(t *testing.T) {
+func Test_BlockConstructor(t *testing.T) {
 	data := "data"
-	testBlock := New(data, "AAA")
+	testBlock := newBlock(data, "AAA")
 	if testBlock.Data != data {
 		t.Errorf("Data missmatch %s %s", testBlock.Data, data)
 	}

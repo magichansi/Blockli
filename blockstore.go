@@ -1,9 +1,7 @@
-package blockstore
+package blockli
 
 import (
 	"encoding/json"
-
-	Block "github.com/magichansi/blockli/block"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/syndtr/goleveldb/leveldb"
@@ -14,8 +12,8 @@ type BlockStore struct {
 	dbPath string
 }
 
-//New sdssdd
-func New(path string) *BlockStore {
+//NewBlockStore sdssdd
+func NewBlockStore(path string) *BlockStore {
 
 	returnStore := new(BlockStore)
 	returnStore.dbPath = path
@@ -23,7 +21,7 @@ func New(path string) *BlockStore {
 }
 
 //Save sdsdsd
-func (BlockStore *BlockStore) Save(key string, value *Block.Block) {
+func (BlockStore *BlockStore) Save(key string, value *Block) {
 	db, err := leveldb.OpenFile(BlockStore.dbPath, nil)
 	if err != nil {
 		log.WithFields(log.Fields{}).Fatal(err.Error())
@@ -38,7 +36,7 @@ func (BlockStore *BlockStore) Save(key string, value *Block.Block) {
 }
 
 //Retrieve sdsds
-func (BlockStore *BlockStore) Retrieve(key string) *Block.Block {
+func (BlockStore *BlockStore) Retrieve(key string) *Block {
 	db, err := leveldb.OpenFile(BlockStore.dbPath, nil)
 	if err != nil {
 		log.WithFields(log.Fields{}).Fatal(err.Error())
@@ -50,7 +48,7 @@ func (BlockStore *BlockStore) Retrieve(key string) *Block.Block {
 		log.WithFields(log.Fields{}).Warning(err.Error())
 	}
 
-	var returnBlock *Block.Block
+	var returnBlock *Block
 	err = json.Unmarshal(data, &returnBlock)
 
 	if err != nil {

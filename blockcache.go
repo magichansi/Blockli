@@ -1,33 +1,30 @@
-package blockcache
+package blockli
 
 import (
 	"log"
-
-	"github.com/magichansi/blockli/block"
-	"github.com/magichansi/blockli/blockstore"
 )
 
 //BlockCache asdadasda
 type BlockCache struct {
-	blockStore *blockstore.BlockStore
-	blockarray map[string]*block.Block
+	blockStore *BlockStore
+	blockarray map[string]*Block
 }
 
-//New  sdadadaddasd
-func New(savePath string) *BlockCache {
+//NewBlockCache  sdadadaddasd
+func NewBlockCache(savePath string) *BlockCache {
 	dbh := new(BlockCache)
-	dbh.blockStore = blockstore.New(savePath)
+	dbh.blockStore = NewBlockStore(savePath)
 	var err error
 	if err != nil {
 		log.Fatal(err)
 		log.Fatal("01")
 	}
-	dbh.blockarray = make(map[string]*block.Block)
+	dbh.blockarray = make(map[string]*Block)
 	return dbh
 }
 
-func (db *BlockCache) Read(key string) *block.Block {
-	var returnBlock *block.Block
+func (db *BlockCache) Read(key string) *Block {
+	var returnBlock *Block
 
 	returnBlock = db.blockarray[key]
 	if returnBlock != nil {
@@ -41,7 +38,7 @@ func (db *BlockCache) Read(key string) *block.Block {
 	return nil
 }
 
-func (db *BlockCache) Write(value *block.Block) string {
+func (db *BlockCache) Write(value *Block) string {
 	db.blockarray[value.GetHash()] = value
 	db.blockStore.Save(value.GetHash(), value)
 	return value.GetHash()

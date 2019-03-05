@@ -1,4 +1,4 @@
-package block
+package blockli
 
 import "time"
 import "crypto/sha256"
@@ -13,7 +13,7 @@ type Block struct {
 }
 
 //New asdsd
-func New(data string, previousHash string) *Block {
+func newBlock(data string, previousHash string) *Block {
 	returnBlock := new(Block)
 	returnBlock.Data = data
 	returnBlock.Timestamp = time.Now().Unix()
@@ -33,10 +33,12 @@ func (b Block) GetTimestamp() int64 {
 func (b Block) GetPreviousHash() string {
 	return b.PreviousHash
 }
+
 //GetHash adssd
 func (b Block) GetHash() string {
 	return b.Hash
 }
+
 //GetData sdsd
 func (b Block) GetData() string {
 	return b.Data
