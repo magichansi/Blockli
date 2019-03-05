@@ -2,13 +2,15 @@ language: go
 sudo: false
 
 go:
-    - 1.11.5
+  - 1.11.5
 
-script: go test ./...
+script: 
+  - go test -v -covermode=count -coverprofile=coverage.out
+  - $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken "E2aHZPnQ3mwwR9SNW3BZQUp5/CLbS3M5aO5+WZfuMjD/L6RyZpkWZK+9oyty2NsStYkoKKn54iFaFrVfJap9MK+b7JD84YJorsNsrpJ+VYKJyPo/tTG37D9ecGXxFcpI8cj0YbWeARz+wHV4cJwEGbVj7RmUsjShgjyFHoBXSZiA+vOUw0K7rasnQk8OWiY3KG/pgSE+QcsMjM+Ik770CdRRtGrPKWecFXxUJ1NCso2HcZqu6NTQa/Y3DsidEzkhWVId357ztJJpC/dC5Ll3LjuBcIScSXuRBpSEPdRZyyzmFyO36PvKEw9pLfJzGeqesSdEOR3Na9crDGQr78zRZ2Ciy2s6CwsTVCCFR5N0sZ4GDvcU+5k7P18oMVEPWPzgBdUEgX+aYFx7B76vB0EsDcskqGolYh4dPb7rYOvkSHCodXU4/HyHBN2eqrjU3ue+aoOpZJh5V06I46i3IVXCnvLuEsGLuVjY4dFjfAjqyYamJIMwxWaC/DBIVjJhvyTUyWQ9CxVsCtQWgAcItI5bMifrLAygizvdDfMTkBpjuoh6MutZeG939dOKEof2NApbDpTxG/bpaWQZ1OU/o9vGLVXbINCih38I/mP/ceCFy79FL+MddiLoADCrvGl7qNM4SLlqIXXAVKw59fiZ7bDffChWHgcXaGXs1emzl9jBPGE="
 
 before_install:
+  - go get golang.org/x/tools/cmd/cover
+  - go get github.com/mattn/goveralls
   - go get github.com/sirupsen/logrus
   - go get github.com/syndtr/goleveldb/leveldb
-after_success:
-  - export CODECOV_TOKEN="7b9ed0e2-df93-46ab-8b21-6d11f71abb9b"
-  - bash <(curl -s https://codecov.io/bash)
+
